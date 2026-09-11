@@ -1,22 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration/ServiceWorkerRegistration";
-
+import InstallPrompt from "@/components/InstallPrompt/InstallPrompt";
 export const metadata: Metadata = {
-  title: "Lumihaus — Modern Beauty Essentials",
-  description: "Effortless cosmetics designed to enhance your natural beauty.",
-  applicationName: "Lumihaus",
-  appleWebApp: {
-    capable: true,
-    title: "Lumihaus",
-    statusBarStyle: "default",
-  },
+  title: "My PWA",
+  description: "My Next.js Progressive Web App",
+  manifest: "/manifest.webmanifest",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f4729a",
-  width: "device-width",
-  initialScale: 1,
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
@@ -27,8 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ServiceWorkerRegistration />
         {children}
+        <InstallPrompt />
       </body>
     </html>
   );
