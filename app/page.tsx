@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#fff8fa] text-[#30262a]">
       {/* Background glow */}
-      <div className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <div className="absolute -left-32 top-20 h-80 w-80 rounded-full bg-pink-200/30 blur-[100px]" />
         <div className="absolute right-0 top-[35%] h-96 w-96 rounded-full bg-rose-200/30 blur-[120px]" />
         <div className="absolute bottom-0 left-[35%] h-80 w-80 rounded-full bg-pink-100/40 blur-[100px]" />
@@ -74,8 +74,11 @@ export default function Home() {
         </div>
       </nav>
 
+      {/* Price Calculator */}
+      <PriceCalculator />
+
       {/* Hero */}
-      <section className="relative min-h-[760px] w-full overflow-hidden sm:min-h-screen">
+      <section className="relative min-h-190 w-full overflow-hidden sm:min-h-screen">
         {/* Hero image */}
         <div className="absolute inset-0 md:left-[38%]">
           <Image
@@ -132,9 +135,6 @@ export default function Home() {
           SCROLL TO EXPLORE
         </div>
       </section>
-
-      {/* Price Calculator */}
-      <PriceCalculator />
 
       {/* Brand statement */}
       <section

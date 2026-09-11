@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration/ServiceWorkerRegistration";
 import InstallPrompt from "@/components/InstallPrompt/InstallPrompt";
 export const metadata: Metadata = {
-  title: "My PWA",
-  description: "My Next.js Progressive Web App",
+  title: "LumiHaus",
+  description: "Effortless cosmetics designed to enhance your natural beauty.",
   manifest: "/manifest.webmanifest",
 };
 
