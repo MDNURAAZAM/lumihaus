@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offline</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #111827;
+        --primary: #8b5cf6;
+        --text: #f8fafc;
+        --muted: #cbd5e1;
+        --border: rgba(148, 163, 184, 0.2);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        height: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg, var(--bg), #1e293b);
+        color: var(--text);
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+      }
+
+      .card {
+        width: min(92vw, 520px);
+        padding: 2.25rem 2rem;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: rgba(17, 24, 39, 0.9);
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.48);
+        text-align: center;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 74px;
+        height: 74px;
+        margin-bottom: 1rem;
+        border-radius: 50%;
+        background: rgba(139, 92, 246, 0.12);
+        border: 1px solid rgba(139, 92, 246, 0.4);
+        font-size: 2.25rem;
+      }
+
+      h1 {
+        margin: 0 0 0.8rem;
+        font-size: clamp(2rem, 4vw, 2.7rem);
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+        font-size: 1.05rem;
+      }
+
+      .hint {
+        margin-top: 1.4rem;
+        font-size: 0.96rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card" role="alert" aria-live="polite">
+      <div class="badge" aria-hidden="true">📡</div>
+      <h1>You're offline</h1>
+      <p>
+        The page you requested is unavailable right now because your internet connection is not active.
+      </p>
+      <p class="hint">Please reconnect to the internet and try again.</p>
+    </main>
+  </body>
+</html>
