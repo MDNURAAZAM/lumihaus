@@ -6,11 +6,22 @@ export default function PriceCalculator() {
   const [originalWeight, setOriginalWeight] = useState("");
   const [originalPrice, setOriginalPrice] = useState("");
 
-  const calculatedPrice = Math.ceil(getBDPrice(originalWeight, originalPrice));
+  const { sellingPrice, priceWithIncentive } = getBDPrice(
+    originalWeight,
+    originalPrice,
+  );
+
+  const calculatedPrice = Math.ceil(sellingPrice);
+  const buyingPrice = Math.ceil(priceWithIncentive);
+  const profit = calculatedPrice - buyingPrice;
+
+  const formatPrice = (price: number) =>
+    price.toLocaleString("en-BD", {
+      maximumFractionDigits: 0,
+    });
 
   return (
     <section className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20 md:px-10 md:py-28 lg:px-12">
-      {/* Pink glow */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink-300/20 blur-[100px] sm:h-96 sm:w-96 sm:blur-[120px]" />
 
       <div className="relative mx-auto w-full max-w-5xl">
@@ -31,7 +42,7 @@ export default function PriceCalculator() {
         </div>
 
         {/* Calculator */}
-        <div className="grid overflow-hidden rounded-[24px] border border-white/70 bg-white/60 shadow-[0_20px_80px_rgba(236,72,153,0.10)] backdrop-blur-xl sm:rounded-[32px] md:grid-cols-2">
+        <div className="grid overflow-hidden rounded-[24px] border border-white/70 bg-white/60 shadow-[0_20px_80px_rgba(236,72,153,0.10)] backdrop-blur-xl sm:rounded-[32px] grid-cols-2">
           {/* Inputs */}
           <div className="p-5 sm:p-7 md:p-10">
             <div className="space-y-5">
@@ -89,32 +100,53 @@ export default function PriceCalculator() {
             </div>
           </div>
 
-          {/* Result */}
-          <div className="relative flex min-h-[260px] items-center justify-center overflow-hidden bg-linear-to-br from-[#fff1f5] via-[#ffe9f0] to-[#fbd8e5] p-6 sm:min-h-[300px] sm:p-8 md:min-h-full">
-            {/* Inner glow */}
-            <div className="pointer-events-none absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/60 blur-[70px]" />
-
-            <div className="relative z-10 text-center">
-              <p className="text-[9px] tracking-[0.3em] text-pink-500 sm:text-[10px]">
-                CALCULATED PRICE
-              </p>
-
-              <p className="mt-4 font-sans text-4xl font-light tracking-tight text-[#392d32] sm:text-5xl md:text-6xl">
-                BDT{" "}
-                {calculatedPrice.toLocaleString("en-BD", {
-                  maximumFractionDigits: 0,
-                })}
-              </p>
-
+          {/* Results */}
+          <div className=" overflow-hidden bg-linear-to-br from-[#fff1f5] via-[#ffe9f0] to-[#fbd8e5] p-5 sm:p-8 md:p-10">
+            <div className=" flex items-center justify-between h-full w-full">
               {calculatedPrice > 0 ? (
-                <p className="mt-3 text-[10px] text-[#806f76] sm:text-xs">
-                  Estimated final selling price
-                </p>
+                <div className="grid grid-cols-1 items-center justify-center gap-3 sm:grid-cols-3 sm:gap-3">
+                  {/* Selling Price */}
+                  <div className="rounded-2xl border border-white/80 bg-white/75 p-4 shadow-sm sm:p-4">
+                    <p className="flex items-center justify-center text-[9px] tracking-[0.2em] text-green-400 sm:text-[10px] ">
+                      SELLING PRICE
+                    </p>
+
+                    <p className="mt-2 text-3xl font-medium tracking-tight text-green-400">
+                      ৳ {formatPrice(calculatedPrice)}
+                    </p>
+                  </div>
+
+                  {/* Buying Price */}
+                  <div className="rounded-2xl border border-white/70 bg-white/55 p-4 sm:p-4">
+                    <div className="flex items-center justify-between gap-2">
+                      <p className="flex items-center justify-center  text-[9px] tracking-[0.2em] text-red-400 sm:text-[10px]">
+                        BUYING PRICE
+                      </p>
+                    </div>
+
+                    <p className="flex items-center justify-center mt-2 text-3xl font-medium text-red-400 ">
+                      ৳ {formatPrice(buyingPrice)}
+                    </p>
+                  </div>
+
+                  {/* Profit */}
+                  <div className="rounded-2xl border border-pink-200/70 bg-white/65 p-4 sm:p-5">
+                    <p className="flex items-center justify-center text-[9px] tracking-[0.2em] text-blue-400 sm:text-[10px]">
+                      PROFIT
+                    </p>
+
+                    <p className="flex items-center justify-center mt-2 text-3xl font-medium text-blue-400 ">
+                      ৳ {formatPrice(profit)}
+                    </p>
+                  </div>
+                </div>
               ) : (
-                <p className="mx-auto mt-4 max-w-[240px] text-[10px] leading-5 text-[#806f76] sm:text-xs">
-                  Enter the product weight and original price to see the
-                  calculation.
-                </p>
+                <div className="flex min-h-[260px] items-center justify-center rounded-2xl border border-white/70 bg-white/40 p-6 text-center">
+                  <p className="max-w-[240px] text-xs leading-6 text-[#806f76]">
+                    Enter the product weight and original price to see your
+                    selling price, buying price and estimated profit.
+                  </p>
+                </div>
               )}
             </div>
           </div>
@@ -134,11 +166,14 @@ const getBDPrice = (weight: string, euroPrice: string) => {
     productWeight <= 0 ||
     productPrice <= 0
   ) {
-    return 0;
+    return {
+      sellingPrice: 0,
+      priceWithIncentive: 0,
+    };
   }
 
   // Import cost
-  const importCost = productWeight * 0.012;
+  const importCost = productWeight * 0.013;
 
   // Product cost + import cost in EUR
   const totalProductCost = productPrice + importCost;
@@ -149,8 +184,8 @@ const getBDPrice = (weight: string, euroPrice: string) => {
   // Add 2.5% incentive
   const priceWithIncentive = convertedBDTPrice * 1.025;
 
-  // Add 20% selling margin
-  const sellingPrice = priceWithIncentive * 1.2;
+  // Add 26% selling margin
+  const sellingPrice = priceWithIncentive * 1.26;
 
-  return sellingPrice;
+  return { sellingPrice, priceWithIncentive };
 };
