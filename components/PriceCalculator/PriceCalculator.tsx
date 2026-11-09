@@ -101,12 +101,12 @@ export default function PriceCalculator() {
           </div>
 
           {/* Results */}
-          <div className=" overflow-hidden bg-linear-to-br from-[#fff1f5] via-[#ffe9f0] to-[#fbd8e5] p-5 sm:p-8 md:p-10">
+          <div className="size-full overflow-hidden bg-linear-to-br from-[#fff1f5] via-[#ffe9f0] to-[#fbd8e5] p-3 sm:p-5 ">
             <div className=" flex items-center justify-between h-full w-full">
               {calculatedPrice > 0 ? (
-                <div className="grid grid-cols-1 items-center justify-center gap-3 sm:grid-cols-3 sm:gap-3">
+                <div className="size-full flex items-center justify-center gap-3  flex-wrap">
                   {/* Selling Price */}
-                  <div className="rounded-2xl border border-white/80 bg-white/75 p-4 shadow-sm sm:p-4">
+                  <div className="rounded-2xl border border-white/80 bg-white/75 p-3 sm:p-5 shadow-2xl">
                     <p className="flex items-center justify-center text-[9px] tracking-[0.2em] text-green-400 sm:text-[10px] ">
                       SELLING PRICE
                     </p>
@@ -117,12 +117,13 @@ export default function PriceCalculator() {
                   </div>
 
                   {/* Buying Price */}
-                  <div className="rounded-2xl border border-white/70 bg-white/55 p-4 sm:p-4">
-                    <div className="flex items-center justify-between gap-2">
-                      <p className="flex items-center justify-center  text-[9px] tracking-[0.2em] text-red-400 sm:text-[10px]">
-                        BUYING PRICE
-                      </p>
-                    </div>
+                  <div
+                    className="rounded-2xl border border-white/70 bg-white/55 p-3 sm:p-5 shadow-2xl"
+                    shadow-2xl
+                  >
+                    <p className="flex items-center justify-center  text-[9px] tracking-[0.2em] text-red-400 sm:text-[10px]">
+                      BUYING PRICE
+                    </p>
 
                     <p className="flex items-center justify-center mt-2 text-3xl font-medium text-red-400 ">
                       ৳ {formatPrice(buyingPrice)}
@@ -130,7 +131,7 @@ export default function PriceCalculator() {
                   </div>
 
                   {/* Profit */}
-                  <div className="rounded-2xl border border-pink-200/70 bg-white/65 p-4 sm:p-5">
+                  <div className="rounded-2xl border border-pink-200/70 bg-white/65 p-3 sm:p-5 shadow-2xl">
                     <p className="flex items-center justify-center text-[9px] tracking-[0.2em] text-blue-400 sm:text-[10px]">
                       PROFIT
                     </p>
