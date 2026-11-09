@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import PriceCard from "../PriceCard/PriceCard";
 
 export default function PriceCalculator() {
   const [originalWeight, setOriginalWeight] = useState("");
@@ -14,11 +15,6 @@ export default function PriceCalculator() {
   const calculatedPrice = Math.ceil(sellingPrice);
   const buyingPrice = Math.ceil(priceWithIncentive);
   const profit = calculatedPrice - buyingPrice;
-
-  const formatPrice = (price: number) =>
-    price.toLocaleString("en-BD", {
-      maximumFractionDigits: 0,
-    });
 
   return (
     <section className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20 md:px-10 md:py-28 lg:px-12">
@@ -42,7 +38,7 @@ export default function PriceCalculator() {
         </div>
 
         {/* Calculator */}
-        <div className="grid overflow-hidden rounded-[24px] border border-white/70 bg-white/60 shadow-[0_20px_80px_rgba(236,72,153,0.10)] backdrop-blur-xl sm:rounded-[32px] grid-cols-2">
+        <div className="grid overflow-hidden rounded-3xl border border-white/70 bg-white/60 shadow-[0_20px_80px_rgba(236,72,153,0.10)] backdrop-blur-xl sm:rounded-[32px] grid-cols-2">
           {/* Inputs */}
           <div className="p-5 sm:p-7 md:p-10">
             <div className="space-y-5">
@@ -106,43 +102,27 @@ export default function PriceCalculator() {
               {calculatedPrice > 0 ? (
                 <div className="size-full flex items-center justify-center gap-3  flex-wrap">
                   {/* Selling Price */}
-                  <div className="rounded-2xl border border-white/80 bg-white/75 p-3 sm:p-5 shadow-2xl">
-                    <p className="flex items-center justify-center text-[9px] tracking-[0.2em] text-green-400 sm:text-[10px] ">
-                      SELLING PRICE
-                    </p>
-
-                    <p className="mt-2 text-3xl font-medium tracking-tight text-green-400">
-                      ৳ {formatPrice(calculatedPrice)}
-                    </p>
-                  </div>
+                  <PriceCard
+                    cardText="Selling Price"
+                    price={calculatedPrice}
+                    textColor="text-green-400"
+                  />
 
                   {/* Buying Price */}
-                  <div
-                    className="rounded-2xl border border-white/70 bg-white/55 p-3 sm:p-5 shadow-2xl"
-                    shadow-2xl
-                  >
-                    <p className="flex items-center justify-center  text-[9px] tracking-[0.2em] text-red-400 sm:text-[10px]">
-                      BUYING PRICE
-                    </p>
-
-                    <p className="flex items-center justify-center mt-2 text-3xl font-medium text-red-400 ">
-                      ৳ {formatPrice(buyingPrice)}
-                    </p>
-                  </div>
-
+                  <PriceCard
+                    cardText="Buying Price"
+                    price={buyingPrice}
+                    textColor="text-red-400"
+                  />
                   {/* Profit */}
-                  <div className="rounded-2xl border border-pink-200/70 bg-white/65 p-3 sm:p-5 shadow-2xl">
-                    <p className="flex items-center justify-center text-[9px] tracking-[0.2em] text-blue-400 sm:text-[10px]">
-                      PROFIT
-                    </p>
-
-                    <p className="flex items-center justify-center mt-2 text-3xl font-medium text-blue-400 ">
-                      ৳ {formatPrice(profit)}
-                    </p>
-                  </div>
+                  <PriceCard
+                    cardText="Profit"
+                    price={profit}
+                    textColor="text-blue-400"
+                  />
                 </div>
               ) : (
-                <div className="flex min-h-[260px] items-center justify-center rounded-2xl border border-white/70 bg-white/40 p-6 text-center">
+                <div className="flex min-h-65 items-center justify-center rounded-2xl border border-white/70 bg-white/40 p-6 text-center">
                   <p className="max-w-[240px] text-xs leading-6 text-[#806f76]">
                     Enter the product weight and original price to see your
                     selling price, buying price and estimated profit.
