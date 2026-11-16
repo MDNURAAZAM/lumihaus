@@ -39,7 +39,7 @@ export default function PriceCalculator() {
         </div>
 
         {/* Calculator */}
-        <div className="grid overflow-hidden rounded-3xl border border-white/70 bg-white/60 shadow-[0_20px_80px_rgba(236,72,153,0.10)] backdrop-blur-xl sm:rounded-[32px] grid-cols-2">
+        <div className="grid overflow-hidden rounded-3xl border border-white/70 bg-white/60 shadow-[0_20px_80px_rgba(236,72,153,0.10)] backdrop-blur-xl sm:rounded-4xl grid-cols-2">
           {/* Inputs */}
           <div className="p-5 sm:p-7 md:p-10">
             <div className="space-y-5">
