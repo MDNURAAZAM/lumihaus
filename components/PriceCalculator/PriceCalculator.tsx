@@ -23,7 +23,7 @@ export default function PriceCalculator() {
 
       <div className="relative mx-auto w-full max-w-5xl">
         {/* Header */}
-        <div className="mb-8 text-center sm:mb-10 md:mb-12">
+        <div className="hidden sm:block mb-8 text-center sm:mb-10 md:mb-12">
           <p className="text-[9px] tracking-[0.3em] text-pink-500 sm:text-[10px]">
             PRODUCT CALCULATOR
           </p>
@@ -40,7 +40,7 @@ export default function PriceCalculator() {
 
         {/* Calculator */}
 
-        <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-white/70 bg-white/60 shadow-[0_20px_80px_rgba(236,72,153,0.10)] backdrop-blur-xl sm:grid-cols-2 sm:rounded-4xl">
+        <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-white/70 bg-white/60 shadow-[0_20px_80px_rgba(236,72,153,0.10)] backdrop-blur-xl mt-8 sm:mt-0 sm:grid-cols-2 sm:rounded-4xl">
           {/* Inputs */}
           <div className="p-3 sm:p-7 md:p-10">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-5">
