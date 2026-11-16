@@ -98,7 +98,7 @@ export default function PriceCalculator() {
 
           {/* Results */}
           <div className="size-full overflow-hidden bg-linear-to-br from-[#fff1f5] via-[#ffe9f0] to-[#fbd8e5] p-3 sm:p-5">
-            <div className="flex h-full w-full items-center justify-between">
+            <div className="flex h-full w-full items-center justify-center">
               {retailPriceCeiled > 0 ? (
                 <div className="grid size-full grid-cols-2 place-items-center gap-x-4 gap-y-2 sm:flex sm:flex-wrap sm:justify-center">
                   <PriceCard
