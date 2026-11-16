@@ -102,11 +102,11 @@ export default function PriceCalculator() {
             <div className=" flex items-center justify-between h-full w-full">
               {retailPriceCeiled > 0 ? (
                 <div className="size-full flex items-center justify-center gap-3  flex-wrap">
-                  {/* Buying Price */}
+                  {/* Retail Price */}
                   <PriceCard
-                    cardText="Buying Price"
-                    price={buyingPrice}
-                    textColor="text-red-400"
+                    cardText="Retail Price"
+                    price={retailPriceCeiled}
+                    textColor="text-green-400"
                   />
 
                   {/* Whole sale price  */}
@@ -116,11 +116,11 @@ export default function PriceCalculator() {
                     textColor="text-indigo-400"
                   />
 
-                  {/* Retail Price */}
+                  {/* Buying Price */}
                   <PriceCard
-                    cardText="Retail Price"
-                    price={retailPriceCeiled}
-                    textColor="text-green-400"
+                    cardText="Buying Price"
+                    price={buyingPrice}
+                    textColor="text-red-400"
                   />
 
                   {/* Profit */}
