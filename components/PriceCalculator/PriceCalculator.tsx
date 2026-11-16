@@ -7,14 +7,15 @@ export default function PriceCalculator() {
   const [originalWeight, setOriginalWeight] = useState("");
   const [originalPrice, setOriginalPrice] = useState("");
 
-  const { sellingPrice, priceWithIncentive } = getBDPrice(
+  const { retailPrice, wholesalePrice, priceWithIncentive } = getBDPrice(
     originalWeight,
     originalPrice,
   );
 
-  const calculatedPrice = Math.ceil(sellingPrice);
+  const retailPriceCeiled = Math.ceil(retailPrice);
+  const wholesalePriceCeiled = Math.ceil(wholesalePrice);
   const buyingPrice = Math.ceil(priceWithIncentive);
-  const profit = calculatedPrice - buyingPrice;
+  const retailProfit = retailPriceCeiled - buyingPrice;
 
   return (
     <section className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20 md:px-10 md:py-28 lg:px-12">
@@ -99,26 +100,34 @@ export default function PriceCalculator() {
           {/* Results */}
           <div className="size-full overflow-hidden bg-linear-to-br from-[#fff1f5] via-[#ffe9f0] to-[#fbd8e5] p-3 sm:p-5 ">
             <div className=" flex items-center justify-between h-full w-full">
-              {calculatedPrice > 0 ? (
+              {retailPriceCeiled > 0 ? (
                 <div className="size-full flex items-center justify-center gap-3  flex-wrap">
-                  {/* Selling Price */}
-                  <PriceCard
-                    cardText="Selling Price"
-                    price={calculatedPrice}
-                    textColor="text-green-400"
-                  />
-
                   {/* Buying Price */}
                   <PriceCard
                     cardText="Buying Price"
                     price={buyingPrice}
                     textColor="text-red-400"
                   />
+
+                  {/* Whole sale price  */}
+                  <PriceCard
+                    cardText="WS Price"
+                    price={wholesalePriceCeiled}
+                    textColor="text-indigo-400"
+                  />
+
+                  {/* Retail Price */}
+                  <PriceCard
+                    cardText="Retail Price"
+                    price={retailPriceCeiled}
+                    textColor="text-green-400"
+                  />
+
                   {/* Profit */}
                   <PriceCard
-                    cardText="Profit"
-                    price={profit}
-                    textColor="text-blue-400"
+                    cardText="Retail Profit"
+                    price={retailProfit}
+                    textColor="text-gray-400"
                   />
                 </div>
               ) : (
@@ -148,7 +157,8 @@ const getBDPrice = (weight: string, euroPrice: string) => {
     productPrice <= 0
   ) {
     return {
-      sellingPrice: 0,
+      retailPrice: 0,
+      wholesalePrice: 0,
       priceWithIncentive: 0,
     };
   }
@@ -166,7 +176,10 @@ const getBDPrice = (weight: string, euroPrice: string) => {
   const priceWithIncentive = convertedBDTPrice * 1.025;
 
   // Add 26% selling margin
-  const sellingPrice = priceWithIncentive * 1.26;
+  const retailPrice = priceWithIncentive * 1.26;
 
-  return { sellingPrice, priceWithIncentive };
+  // Add 20% selling margin
+  const wholesalePrice = priceWithIncentive * 1.2;
+
+  return { retailPrice, wholesalePrice, priceWithIncentive };
 };
