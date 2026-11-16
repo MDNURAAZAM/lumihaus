@@ -39,20 +39,21 @@ export default function PriceCalculator() {
         </div>
 
         {/* Calculator */}
-        <div className="grid overflow-hidden rounded-3xl border border-white/70 bg-white/60 shadow-[0_20px_80px_rgba(236,72,153,0.10)] backdrop-blur-xl sm:rounded-4xl grid-cols-2">
+
+        <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-white/70 bg-white/60 shadow-[0_20px_80px_rgba(236,72,153,0.10)] backdrop-blur-xl sm:grid-cols-2 sm:rounded-4xl">
           {/* Inputs */}
-          <div className="p-5 sm:p-7 md:p-10">
-            <div className="space-y-5">
+          <div className="p-3 sm:p-7 md:p-10">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:gap-5">
               {/* Weight */}
               <div>
                 <label
                   htmlFor="original-weight"
-                  className="mb-2 block text-[9px] tracking-[0.2em] text-[#756a70] sm:text-[10px]"
+                  className="mb-2 block text-[9px] tracking-[0.1em] text-[#756a70] sm:text-[10px] sm:tracking-[0.2em]"
                 >
                   ORIGINAL PRODUCT WEIGHT
                 </label>
 
-                <div className="flex h-12 items-center rounded-xl border border-[#eadde2] bg-white/70 px-3 transition focus-within:border-pink-300 focus-within:ring-2 focus-within:ring-pink-100 sm:h-14 sm:rounded-2xl sm:px-4">
+                <div className="flex h-12 items-center rounded-xl border border-[#eadde2] bg-white/70 px-2 transition focus-within:border-pink-300 focus-within:ring-2 focus-within:ring-pink-100 sm:h-14 sm:rounded-2xl sm:px-4">
                   <input
                     id="original-weight"
                     type="number"
@@ -63,8 +64,7 @@ export default function PriceCalculator() {
                     placeholder="e.g. 100"
                     className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-[#b7aab0]"
                   />
-
-                  <span className="ml-2 shrink-0 text-xs text-[#9b8c92]">
+                  <span className="ml-1 shrink-0 text-xs text-[#9b8c92]">
                     g
                   </span>
                 </div>
@@ -74,14 +74,13 @@ export default function PriceCalculator() {
               <div>
                 <label
                   htmlFor="original-price"
-                  className="mb-2 block text-[9px] tracking-[0.2em] text-[#756a70] sm:text-[10px]"
+                  className="mb-2 block text-[9px] tracking-[0.1em] text-[#756a70] sm:text-[10px] sm:tracking-[0.2em]"
                 >
                   ORIGINAL PRODUCT PRICE
                 </label>
 
-                <div className="flex h-12 items-center rounded-xl border border-[#eadde2] bg-white/70 px-3 transition focus-within:border-pink-300 focus-within:ring-2 focus-within:ring-pink-100 sm:h-14 sm:rounded-2xl sm:px-4">
+                <div className="flex h-12 items-center rounded-xl border border-[#eadde2] bg-white/70 px-2 transition focus-within:border-pink-300 focus-within:ring-2 focus-within:ring-pink-100 sm:h-14 sm:rounded-2xl sm:px-4">
                   <span className="shrink-0 text-sm text-[#9b8c92]">€</span>
-
                   <input
                     id="original-price"
                     type="number"
@@ -90,7 +89,7 @@ export default function PriceCalculator() {
                     value={originalPrice}
                     onChange={(e) => setOriginalPrice(e.target.value)}
                     placeholder="e.g. 50"
-                    className="min-w-0 flex-1 bg-transparent py-3 pl-2 text-sm outline-none placeholder:text-[#b7aab0]"
+                    className="min-w-0 flex-1 bg-transparent py-3 pl-1 text-sm outline-none placeholder:text-[#b7aab0] sm:pl-2"
                   />
                 </div>
               </div>
@@ -98,32 +97,28 @@ export default function PriceCalculator() {
           </div>
 
           {/* Results */}
-          <div className="size-full overflow-hidden bg-linear-to-br from-[#fff1f5] via-[#ffe9f0] to-[#fbd8e5] p-3 sm:p-5 ">
-            <div className=" flex items-center justify-between h-full w-full">
+          <div className="size-full overflow-hidden bg-linear-to-br from-[#fff1f5] via-[#ffe9f0] to-[#fbd8e5] p-3 sm:p-5">
+            <div className="flex h-full w-full items-center justify-between">
               {retailPriceCeiled > 0 ? (
-                <div className="size-full flex items-center justify-center gap-3  flex-wrap">
-                  {/* Retail Price */}
+                <div className="grid size-full grid-cols-2 place-items-center gap-x-4 gap-y-2 sm:flex sm:flex-wrap sm:justify-center">
                   <PriceCard
                     cardText="Retail Price"
                     price={retailPriceCeiled}
                     textColor="text-green-400"
                   />
 
-                  {/* Whole sale price  */}
                   <PriceCard
                     cardText="WS Price"
                     price={wholesalePriceCeiled}
                     textColor="text-indigo-400"
                   />
 
-                  {/* Buying Price */}
                   <PriceCard
                     cardText="Buying Price"
                     price={buyingPrice}
                     textColor="text-red-400"
                   />
 
-                  {/* Profit */}
                   <PriceCard
                     cardText="Retail Profit"
                     price={retailProfit}
